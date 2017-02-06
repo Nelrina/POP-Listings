@@ -1695,7 +1695,7 @@ class Upload {
         $this->file_safe_name           = true;     // format safely the filename
         $this->file_force_extension     = true;     // forces extension if there isn't one
         $this->file_overwrite           = false;    // allows overwritting if the file already exists
-        $this->file_auto_rename         = false;     // auto-rename if the file already exists
+        $this->file_auto_rename         = true;     // auto-rename if the file already exists
         $this->dir_auto_create          = true;     // auto-creates directory if missing
         $this->dir_auto_chmod           = true;     // auto-chmod directory if not writeable
         $this->dir_chmod                = 0777;     // default chmod to use

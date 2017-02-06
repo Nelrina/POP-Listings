@@ -54,7 +54,7 @@ class MListing
         $stmt->execute() ;
         return $stmt->fetchAll();
     }
-    
+
     // Return an array of all the Listings from one category with the id $id
     public function getAllFromOneCategory($id)
     {
@@ -73,18 +73,28 @@ class MListing
         $q->execute();
         return $q->fetch();
     }
-    
+
     // Update a listing in the database
     public function update(Listing $fl)
     {
         $q = $this->_db->prepare('UPDATE listings SET url = :url, cat = :cat, name = :name, img = :img WHERE id = :id');
-        $q->bindValue(':cat', $fl->setCat(), PDO::PARAM_INT);
-        $q->bindValue(':url', $fl->setUrl(), PDO::PARAM_STR);
-        $q->bindValue(':name', $fl->setName(), PDO::PARAM_STR);
-        $q->bindValue(':img', $fl->setImg(), PDO::PARAM_STR);
+        $q->bindValue(':cat', $fl->getCat(), PDO::PARAM_INT);
+        $q->bindValue(':url', $fl->getUrl(), PDO::PARAM_STR);
+        $q->bindValue(':name', $fl->getName(), PDO::PARAM_STR);
+        $q->bindValue(':img', $fl->getImg(), PDO::PARAM_STR);
+        $q->bindValue(':id',   $fl->getId(), PDO::PARAM_INT);
         $q->execute();
     }
-    
+
+    // Delete image from Listing
+    public function deleteImg(Listing $fl)
+    {
+        $q = $this->_db->prepare('UPDATE listings SET img = :img WHERE id = :id');
+        $q->bindValue(':img', "", PDO::PARAM_STR);
+        $q->bindValue(':id',   $fl->getId(), PDO::PARAM_INT);
+        $q->execute();
+    }
+
     // Return the number of listings
     public function getListCount()
     {

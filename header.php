@@ -1,10 +1,6 @@
 <?php
 session_start();
-
-// Testing if session already open
-// If yes $ok must be equal to "ok", else we redirect to login page
-$ok = (isset($_SESSION['loginOK']) && !empty($_SESSION['loginOK']))?$_SESSION['loginOK']:'';
-if($ok == '') header('location: login.php');
+date_default_timezone_set('Europe/Paris');
 
 require 'src/functions.php';
 spl_autoload_register( 'autoload' );
@@ -17,7 +13,7 @@ $con = $db->getDbh();
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>POP Listings Admin</title>
+    <title>POP Listings</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -71,8 +67,6 @@ $con = $db->getDbh();
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
-            <?php if(isset($ok)) { //If the session is open the search form is displayed
-            ?>
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -91,6 +85,5 @@ $con = $db->getDbh();
                 </li>
             </ul>
           </div>
-              <?php } ?>
         </nav>
       </header>
